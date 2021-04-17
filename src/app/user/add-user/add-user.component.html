@@ -1,0 +1,100 @@
+<form [formGroup]="addUserForm" (ngSubmit)="onSubmit(addUserForm)">
+  <div>
+    <label>
+      memberFirstName:
+      <input formControlName="memberFirstName" placeholder="Your FirstName">
+      <div *ngIf="addUserForm.get('memberFirstName').invalid && (addUserForm.get('memberFirstName').dirty || addUserForm.get('memberFirstName').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      memberMiddleName:
+      <input formControlName="memberMiddleName" placeholder="Your MiddleName">
+      <div *ngIf="addUserForm.get('memberMiddleName').invalid && (addUserForm.get('memberMiddleName').dirty || addUserForm.get('memberMiddleName').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      memberLastName:
+      <input formControlName="memberLastName" placeholder="Your LastName">
+      <div *ngIf="addUserForm.get('memberLastName').invalid && (addUserForm.get('memberLastName').dirty || addUserForm.get('memberLastName').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      memberImgSrc:
+      <input formControlName="memberImgSrc" placeholder="Your memberImgSrc">
+    </label>
+  </div>
+  <div>
+    <label>
+      memberEmail:
+      <input formControlName="memberEmail" placeholder="Your memberEmail">
+      <div *ngIf="addUserForm.get('memberEmail').invalid && (addUserForm.get('memberEmail').dirty || addUserForm.get('memberEmail').touched)">
+        <p *ngIf="addUserForm.get('memberEmail').errors.email"> Please provide a true email. </p>
+        <p *ngIf="addUserForm.get('memberEmail').errors.required"> Please provide a email. </p>
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      memberMobileNumbers:
+      <input formControlName="memberMobileNumbers" placeholder="Your memberMobileNumbers">
+      <div *ngIf="addUserForm.get('memberMobileNumbers').invalid && (addUserForm.get('memberMobileNumbers').dirty || addUserForm.get('memberMobileNumbers').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      memberAddress:
+      <input formControlName="memberAddress" placeholder="Your memberAddress">
+      <div *ngIf="addUserForm.get('memberAddress').invalid && (addUserForm.get('memberAddress').dirty || addUserForm.get('memberAddress').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      withdrawal:
+      <input formControlName="withdrawal" placeholder="Your withdrawal">
+    </label>
+  </div>
+  <div>
+    <label>
+      password:
+      <input formControlName="password" placeholder="Your password">
+      <div *ngIf="addUserForm.get('password').invalid && (addUserForm.get('password').dirty || addUserForm.get('password').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+  <div>
+    <label>
+      confirmPassword:
+      <input formControlName="confirmPassword" placeholder="Your confirmPassword">
+      <div *ngIf="addUserForm.get('confirmPassword').invalid && (addUserForm.get('confirmPassword').dirty || addUserForm.get('confirmPassword').touched)">
+        Please provide a name.
+      </div>
+    </label>
+  </div>
+
+  <button type="submit" [disabled]="!addUserForm.valid">Send</button>
+</form>
+
+
+<!-- Success message -->
+<div class="success" *ngIf="showSucessMessage">
+  Saved successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div> -->
