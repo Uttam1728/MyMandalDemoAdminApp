@@ -1,0 +1,206 @@
+<div >
+  <form nz-form class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label 
+		  	nzFor="fromdate"
+			nzTooltipTitle="Please click 'Get captcha'">
+          		Date &nbsp;
+				<i nz-icon 
+					nzType="info-circle" 
+					nzTheme="twotone"
+					nzTooltipTitle="select User, Created From selected Date range" 
+					nzTooltipPlacement="bottom" 
+					nzTooltipColor="blue"
+					nz-button nz-tooltip>
+
+				</i>
+          </nz-form-label>
+          <nz-form-control>
+            <nz-range-picker 
+              [nzFormat]="dateFormat" 
+              [nzDateRender]="tplRender" 
+              [(ngModel)]="searchformdata.date" 
+              name="startToDate">
+            </nz-range-picker>
+            <ng-template #tplRender let-current>
+              <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1">
+                {{ current.getDate() }}
+              </div>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label nzFor="memberemail">Mandal Email(UserName)</nz-form-label>
+          <nz-form-control>
+            <input type="text" 
+              nz-input 
+              placeholder="memberemail" 
+              name="memberemail" 
+              [(ngModel)]="searchformdata.memberemail"
+              attr.id="memberemail" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+  
+    </div>
+    <div nz-row [nzGutter]="24">
+       
+    
+        <div nz-col [nzSpan]="8">
+          <nz-form-item>
+            <nz-form-label nzFor="memberFirstName">First Name</nz-form-label>
+            <nz-form-control>
+              <input type="text" 
+                nz-input 
+                placeholder="memberFirstName" 
+                name="memberFirstName" 
+                [(ngModel)]="searchformdata.memberFirstName"
+                attr.id="memberFirstName" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label nzFor="memberMiddleName">Middle Name</nz-form-label>
+              <nz-form-control>
+                <input type="text" 
+                  nz-input 
+                  placeholder="memberMiddleName" 
+                  name="memberMiddleName" 
+                  [(ngModel)]="searchformdata.memberMiddleName"
+                  attr.id="memberMiddleName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzSpan]="8">
+            <nz-form-item>
+              <nz-form-label nzFor="memberLastName">Last Name</nz-form-label>
+              <nz-form-control>
+                <input type="text" 
+                  nz-input 
+                  placeholder="memberLastName" 
+                  name="memberLastName" 
+                  [(ngModel)]="searchformdata.memberLastName"
+                  attr.id="memberLastName" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+    
+      </div>
+  
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button [nzType]="'primary'" (click)="submitForm()">Search</button>
+        <button nz-button (click)="resetForm()">Clear</button>
+  
+      </div>
+    </div>
+  </form>
+
+
+  <div class="search-result-list">
+    <nz-empty *ngIf="NotFoundContent == true" 
+        nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+        [nzNotFoundContent]="contentTpl" 
+        [nzNotFoundFooter]="footerTpl"
+		class="empty-result"
+		>
+    </nz-empty>
+    <ng-template #footerTpl>
+      <button nz-button nzType="primary" ><a routerLink="../add">Creater new</a></button>
+    </ng-template>
+    <nz-spin *ngIf="isSpinning == true" [nzSpinning]="isSpinning">
+    </nz-spin>
+    
+  <div style="max-width: 72vw;overflow-x: hidden;margin: auto;" >
+    <nz-table 
+    *ngIf="isResult == true" 
+    #basicTable 
+       [nzData]="ResultList" 
+       [nzPageSize]="5" 
+       [nzPageIndex]="1" 
+       [nzPaginationPosition]="'both'"
+       nzOuterBordered
+	   
+       [nzScroll]="{ x: '90vw' }"
+      >
+     <thead>
+       <tr>
+         
+           <th  nzLeft nzWidth="5vw">  </th>
+           <th  nzLeft nzWidth="5vw"> ID </th>
+           <th nzLeft nzWidth="15vw"
+               [nzSortFn]="sortFnEmail" 
+               [nzSortDirections]="sortDirections" 
+               >
+           UserName(email)
+         </th>
+         <th nzWidth="20vw" > Full Name</th>
+         <th> Withdrawal </th>
+         <th > Mobile Numbers </th>
+         <th > Address </th>
+         <th nzRight nzWidth="10vw" > Actions </th>
+       </tr>
+     </thead>
+     
+     <tbody>
+       <ng-container *ngFor="let data of basicTable.data">
+         <tr >
+          
+           
+             <td nzLeft >
+                 <nz-avatar 
+                     nzText="{{ data.memberFirstName.charAt(0).toUpperCase() }}"
+                     nzSize="large"
+                     nzSrc="{{data.memberImgSrc}}"
+                     style="background-color:#87d068;">
+                 </nz-avatar>
+             </td>
+             <td nzLeft>{{ data.memberID }}</td>
+             <td nzLeft>{{ data.memberEmail }}</td>
+             <td>{{ data.memberFirstName | titlecase  }}&nbsp;{{ data.memberMiddleName | titlecase  }}&nbsp;{{ data.memberLastName | titlecase  }}</td>
+             <td>{{ data.withdrawal |currency:"INR":"symbol" }}</td>
+             <td>
+               <li *ngFor="let number of data.memberMobileNumbers;let i=index">
+                <b><i nz-icon nzType="phone" nzTheme="outline"></i></b> &nbsp;{{ number }}
+               </li>
+               
+              </td>
+             <td >{{ data.memberAddress | titlecase}}</td>
+             
+           
+           <td ng nzRight>
+             <a nz-popconfirm 
+                 nzPopconfirmTitle="Sure to Edit?" 
+                 (nzOnConfirm)="deleteRow(data._id)"
+                 nzPopconfirmPlacement="left">
+                 <i nz-icon nzType="edit" nzTheme="outline" style="color: #40a9ff;"></i>
+             </a>
+             
+             <nz-divider nzType="vertical"></nz-divider>
+             
+             <a nz-popconfirm 
+                 nzPopconfirmTitle="Sure to delete?" 
+                 (nzOnConfirm)="deleteRow(data._id)"
+                 nzPopconfirmPlacement="left">
+                 <i nz-icon nzType="delete" nzTheme="outline" style="color:red"></i>
+             </a>
+         </td>
+ 
+         </tr>
+        
+       </ng-container>
+      
+     </tbody>
+   </nz-table>
+
+  </div>
+     
+  
+  </div>
+</div>

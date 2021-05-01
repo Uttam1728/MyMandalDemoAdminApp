@@ -1,0 +1,51 @@
+.ant-advanced-search-form {
+    padding: 24px;
+    background: #fbfbfb;
+    border: 1px solid #d9d9d9;
+    border-radius: 6px;
+  }
+
+  .search-result-list {
+    margin-top: 16px;
+    
+    min-height: 200px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  [nz-form-label] {
+    overflow: visible;
+  }
+
+  button {
+    margin-left: 8px;
+  }
+
+  .collapse {
+    margin-left: 8px;
+    font-size: 12px;
+  }
+
+  .search-area {
+    text-align: right;
+  }
+
+  .border {
+    border: 1px solid #1890ff;
+    border-radius: 50%;
+  }
+  .mandal-cardlist{
+    background: #ECECEC;
+  }
+  .mandal-card{
+    padding:30px;
+    margin: 15px;
+  }
+
+  
+.empty-result{
+  padding: 25px;
+  border: 1px dashed #e9e9e9;
+  background: #fbfbfb;
+  border-radius: 6px;
+}

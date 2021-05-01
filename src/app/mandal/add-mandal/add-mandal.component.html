@@ -1,0 +1,109 @@
+<form nz-form 
+[formGroup]="addMandalForm" 
+(ngSubmit)="onSubmit(addMandalForm)" 
+enctype="multipart/form-data"
+class="ant-advanced-search-form">
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal Name</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      nzErrorTip="Please input your mandalName!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="mandalName" placeholder="mandalName" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal Logo</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      nzErrorTip="Please input your Logo!">
+
+      <nz-upload nzType="drag"  [(nzFileList)]="fileList"
+        [nzBeforeUpload]="beforeUpload" 
+        [nzDisabled]="fileList.length >= 1">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-hint">Click or drag file to this area to upload</p>
+        
+      </nz-upload>
+      
+
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal Installment</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      [nzErrorTip]="installmentValueErrorTpl">
+      <nz-input-group nzPrefixIcon="transaction">
+        <input type="text" nz-input formControlName="installmentValue" placeholder="installmentValue" />
+        <ng-template #installmentValueErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your installmentValue!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">
+            Please input your installmentValue In Desimal Formet!
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal Withdrawal</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      [nzErrorTip]="totalWithdrawalValueErrorTpl">
+      <nz-input-group nzPrefixIcon="dollar">
+        <input type="text" nz-input formControlName="totalWithdrawal" placeholder="totalWithdrawal" />
+        <ng-template #totalWithdrawalValueErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your totalWithdrawal!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">
+            Please input your totalWithdrawal In Desimal Formet!
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal TotalBalence</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      [nzErrorTip]="totalBalenceValueErrorTpl">
+      <nz-input-group nzPrefixIcon="dollar">
+        <input type="text" nz-input formControlName="totalBalence" placeholder="totalBalence" />
+        <ng-template #totalBalenceValueErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your totalBalence!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">
+            Please input your totalBalence In Desimal Formet!
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired [nzSm]="6" [nzXs]="24" nzFor="email">Mandal IntrestRate</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzHasFeedback nzValidatingTip="Validating..."
+      [nzErrorTip]="intrestRateValueErrorTpl">
+      <nz-input-group nzPrefixIcon="dollar">
+        <input type="text" nz-input formControlName="intrestRate" placeholder="intrestRate" />
+        <ng-template #intrestRateValueErrorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please input your intrestRate!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('pattern')">
+            Please input your intrestRate In Desimal Formet!
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12" class="addMandalForm-margin">
+      <button nz-button nzType="primary" class="addMandalForm-margin-button"
+        [disabled]="!addMandalForm.valid">Submit</button>
+      <button nz-button class="addMandalForm-margin-button" (click)="resetForm(addMandalForm)">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+
+</form>

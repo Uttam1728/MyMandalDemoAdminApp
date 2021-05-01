@@ -1,0 +1,42 @@
+body {
+  padding-top: 50px;
+}
+
+
+
+legend {
+  color: #678;
+}
+
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 50%;
+}
+
+.addMandalForm-margin{
+  margin-bottom: 10%;
+}
+.addMandalForm-margin-button{
+  margin : 5px;
+}
+
+
+
+
+.ant-advanced-search-form {
+  padding: 24px;
+  background: #fbfbfb;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+
+
+[nz-form-label] {
+  overflow: visible;
+}
