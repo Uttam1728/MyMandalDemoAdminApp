@@ -25,7 +25,8 @@ export class AddUserComponent implements OnInit {
   fileToUpload: NzUploadFile = null;
   bodyFormData = new FormData();
   mandalNames;
-  mandalNamestoUpdate : string[] = [];
+
+
   constructor(private userService: UserService,private mandalService: MandalService, private fb: FormBuilder, private msg :NzMessageService) { }
 
   ngOnInit(): void {
@@ -40,8 +41,9 @@ export class AddUserComponent implements OnInit {
       withdrawal: 0,
       mandalNamesCtl: [null,Validators.required],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      confirmPassword: ['', [Validators.required, this.confirmationValidator]],
+      confirmPassword: ['', [Validators.required, this.confirmPasswordValidator]],
     });
+
     this.mandalService.getAllMandalnames()
     .subscribe(data => {
       console.log(data);
@@ -58,7 +60,7 @@ export class AddUserComponent implements OnInit {
     Promise.resolve().then(() => this.addUserForm.controls.confirmPassword.updateValueAndValidity());
   }
 
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+  confirmPasswordValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
     } else if (control.value !== this.addUserForm.controls.password.value) {

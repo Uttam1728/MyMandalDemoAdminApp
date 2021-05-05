@@ -17,8 +17,6 @@ export class AddMandalComponent implements OnInit {
   fileList: NzUploadFile[] = [];
   fileToUpload: NzUploadFile = null;
   bodyFormData = new FormData();
-  loading = false;
-
 
 
   constructor(private mandalService: MandalService, private fb: FormBuilder, private msg: NzMessageService) { }
@@ -55,7 +53,7 @@ export class AddMandalComponent implements OnInit {
       console.log(this.fileToUpload);
       let mandal: Mandal = {
         mandalName: form.controls.mandalName.value,
-        mandalLogo: '', //form.controls.mandalLogosrc.value,
+        mandalLogo: '',
         installmentValue: form.controls.installmentValue.value,
         totalWithdrawal: form.controls.totalWithdrawal.value,
         totalBalence: form.controls.totalBalence.value,
